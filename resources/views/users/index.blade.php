@@ -9,6 +9,11 @@
         <div class="max-w-7x1 mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 ">
+                <div class="text-end">
+                    @can('create users')
+                        <a href="{{ route('users.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md">Add User</a
+                        @endcan
+                    </div>
                     <table class="min-w-full my-5">
                         <thead>
                             <tr>
@@ -29,8 +34,15 @@
                                 @can('edit users')
                                 <td class="border px-4 py-2">
                                     <a href="{{ route('users.edit', $user->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded-md">Edit</a>
+                                    @can('delete users')
+                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded-md">Delete</button>
+                                    </form>
+                                    @endcan
+                                    @endcan
                                 </td>
-                                @endcan
                             </tr>
                             @endforeach
                         </tbody>

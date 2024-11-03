@@ -12,8 +12,8 @@
                     <div class="text-end">
                     @can('create roles')
                         <a href="{{ route('roles.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md">Add Role</a
-                            </div>
-                            @endcan
+                        @endcan
+                    </div>
                         <table class="w-full my-5">
                             <thead>
                                 <tr>
