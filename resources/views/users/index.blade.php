@@ -26,9 +26,11 @@
                                 <td class="border px-4 py-2">{{ $user->name }}</td>
                                 <td class="border px-4 py-2">{{ $user->email }}</td>
                                 <td class="border px-4 py-2">{{ $user->roles->pluck("name")->implode(',') }}</td>
+                                @can('edit users')
                                 <td class="border px-4 py-2">
                                     <a href="{{ route('users.edit', $user->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded-md">Edit</a>
                                 </td>
+                                @endcan
                             </tr>
                             @endforeach
                         </tbody>

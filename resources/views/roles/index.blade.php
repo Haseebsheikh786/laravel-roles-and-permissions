@@ -10,8 +10,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 ">
                     <div class="text-end">
+                    @can('create roles')
                         <a href="{{ route('roles.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md">Add Role</a
                             </div>
+                            @endcan
                         <table class="w-full my-5">
                             <thead>
                                 <tr>
@@ -28,12 +30,16 @@
                                     <td class="border px-4 py-2">{{ $role->name }}</td>
                                     <td class="border px-4 py-2">{{ $role->permissions->pluck("name")->implode(',') }}</td>
                                     <td class="border px-4 py-2">
+                                    @can('edit roles')
                                         <a href="{{ route('roles.edit', $role->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded-md">Edit</a>
+                                        @endcan
+                                        @can('delete roles')
                                         <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded-md">Delete</button>
                                         </form>
+                                        @endcan
                                     </td>
                                 </tr>
                                 @endforeach

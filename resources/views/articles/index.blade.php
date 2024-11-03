@@ -9,9 +9,11 @@
         <div class="max-w-7x1 mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 ">
+                @can('create articles')
                     <div class="text-end">
                         <a href="{{ route('articles.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md">Add Articles</a>
                     </div>
+                    @endcan
                     <table class="min-w-full my-5">
                         <thead>
                             <tr>
@@ -28,12 +30,16 @@
                                 <td class="border px-4 py-2">{{ $article->title }}</td>
                                 <td class="border px-4 py-2">{{ $article->author }}</td>
                                 <td class="border px-4 py-2">
+                                @can('edit articles')
                                     <a href="{{ route('articles.edit', $article->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded-md">Edit</a>
+                                    @endcan
+                                    @can('delete articles')
                                     <form action="{{ route('articles.destroy', $article->id) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded-md">Delete</button>
                                     </form>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach
